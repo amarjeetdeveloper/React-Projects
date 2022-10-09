@@ -3,29 +3,38 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 // functional component
-const HeadingComponent = () => {
-  return <h1> coming from functional component </h1>
+const HeadingComponent = (props) => {
+  return <h1> {props.title } {props.count} </h1>
 }
 
 // class component
 class HeadingComponentUsingClass extends React.Component {
   render(){
-  return <h1> coming render from class component </h1>
+  return <h1> coming render from class component == {this.props.title} </h1>
   }
 }
 
-const FunctionalComponent = () => {
-  return <p> {+new Date()} </p> 
+class ClassWalaComponent extends React.Component {
+  render() {
+    return <h1> classwala component == {this.props.title} </h1>
+  }
 }
+
+// function component
+const CurrentTime = () => {
+  return <p> {+new Date()} ==
+   <HeadingComponentUsingClass title="passed from currenttime" /> </p> 
+}
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 setInterval( () => {
 root.render(
   <React.StrictMode>
- <h1> hello world</h1>
- <HeadingComponent />
- <HeadingComponentUsingClass />
- <FunctionalComponent />
+ <HeadingComponent title="hello from Component" count="5" />
+ <CurrentTime />
+ <ClassWalaComponent title="classwala component se aaya hai" />
   </React.StrictMode>
 );
-},6000)
+},3000)
